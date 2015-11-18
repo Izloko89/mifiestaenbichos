@@ -423,7 +423,7 @@ $(".guardar").click(function(e) {
 		//datos de tabla usuario_permisos
 		
 		control = document.getElementById("cot").checked;
-		alert(control);
+		//alert(control);
 		if(control == true)
 		{
 			cotizacion = 1;
