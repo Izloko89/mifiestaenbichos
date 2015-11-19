@@ -1,4 +1,5 @@
 <?php include("partes/header.php"); 
+include("scripts/permisos.php");
 include("scripts/funciones.php"); 
 ?>
 <script src="js/bancos.js"></script>

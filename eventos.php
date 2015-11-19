@@ -1,4 +1,5 @@
 <?php include("partes/header.php");
+include("scripts/permisos.php");
 setlocale(LC_ALL,"");
 setlocale(LC_TIME,"es_MX");
 include("scripts/func_form.php");

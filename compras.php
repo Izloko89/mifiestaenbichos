@@ -1,4 +1,5 @@
 <?php include("partes/header.php"); 
+include("scripts/permisos.php");
 include ("scripts/func_form.php");
 
 //permisos
