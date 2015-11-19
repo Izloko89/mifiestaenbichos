@@ -30,7 +30,14 @@ $modulos=$_POST["modulos"];
 try{
 	$sql="";
 	$bd=new PDO($dsnw,$userw,$passw,$optPDO);
-	
+	$sql="SELECT usuario from usuarios where usuario='$usuario'";
+	$query=$bd->query($sql);
+	$res = $query->fetch(PDO::FETCH_ASSOC);
+	$userDB=$res["usuario"];
+	if(!empty($userDB)){
+		$r["info"]="Usuario Repetido";
+		exit;
+	}
 	$bd->query("INSERT INTO usuarios (nombre,usuario,password,clave,id_empresa,categoria,activo) VALUES ('$nombre','$usuario','$password','$clave',1,'Administrador',1);");
 	
 	//$aidi = $bd->query(select mysql_insert_id());
