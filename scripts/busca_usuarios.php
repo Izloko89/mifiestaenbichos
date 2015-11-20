@@ -13,9 +13,9 @@ try{
 		$campos[$a]=$c["Field"];
 	}
 	
-	$res=$bd->query("SELECT * FROM usuarios WHERE id_empresa=$empresaid AND usuario LIKE '%$term%';");
+	$res=$bd->query("SELECT * FROM usuarios WHERE  usuario LIKE '%$term%';");
 	foreach($res->fetchAll(PDO::FETCH_ASSOC) as $i=>$v){
-		$r[$i]["label"]=$v["nombre"];
+		$r[$i]["label"]=$v["usuario"];
 		$r[$i]["form"]="#f_usuarios";
 		foreach($campos as $campo){
 			$r[$i][$campo]=$v[$campo];

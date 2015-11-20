@@ -36,6 +36,7 @@ try{
 	$userDB=$res["usuario"];
 	if(!empty($userDB)){
 		$r["info"]="Usuario Repetido";
+		echo json_encode($r);
 		exit;
 	}
 	$bd->query("INSERT INTO usuarios (nombre,usuario,password,clave,id_empresa,categoria,activo) VALUES ('$nombre','$usuario','$password','$clave',1,'Administrador',1);");

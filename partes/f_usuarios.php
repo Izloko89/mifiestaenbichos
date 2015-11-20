@@ -114,6 +114,7 @@ $(document).ready(function(e) {
 		});
 		datosContacto(ui.item.id_cliente,'clientes');
 		datosFiscal(ui.item.id_cliente,'clientes');
+		permisos();
 	  }
 	});
 	$(".mostrar").click(function(e) {
@@ -127,11 +128,11 @@ $(document).ready(function(e) {
 		<input type="hidden" name="id_usuario" class="id_usuario" />
 	<div class="campo_form">
 	<label class="label_width">Usuario</label>
-	<input type="text" name="usuario" class="usuario text_mediano requerido" value="">
+	<input type="text" name="usuario" class="usuario text_mediano requerido nombre_buscar" value="">
 	</div>
 	<div class="campo_form">
 	<label class="label_width">Nombre</label>
-	<input type="text" name="nombre" class="nombre text_largo nombre_buscar">
+	<input type="text" name="nombre" class="nombre text_largo">
 	</div>
 	<div class="campo_form">
 	<label class="label_width">Contraseña</label>
@@ -421,7 +422,13 @@ $(".guardar").click(function(e) {
 		email=$(".email").val();
 		
 		//datos de tabla usuario_permisos
-		
+		var cotizacion= 0;
+		var evento= 0;
+		var almacen= 0;
+		var compras= 0;
+		var bancos= 0;
+		var modulos= 0;
+		var gastos= 0;
 		control = document.getElementById("cot").checked;
 		//alert(control);
 		if(control == true)
@@ -492,6 +499,7 @@ $(".guardar").click(function(e) {
 					if(r.continuar){
 						
 						alerta("info",r.info);
+						location.reload();
 					}else{
 							alerta("demo",r.demo);
 						alerta("error",r.info);
