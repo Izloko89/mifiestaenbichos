@@ -5,11 +5,6 @@ include("scripts/func_form.php");
 setlocale(LC_ALL,'');
 setlocale(LC_ALL,'es_MX');
 
-//pendientes
-//- poner un formulario por articulos no devueltos
-
-//checar la integridad de los articulos y el almacén
-	//1.- insertar los articulos en el almacen y el inventario
 	
 try{
 	$bd=new PDO($dsnw, $userw, $passw, $optPDO);
