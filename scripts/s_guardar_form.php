@@ -122,7 +122,8 @@ switch($_POST["metodo"]){
 				$campos=trim($campos,",");
 				$values=substr($values, 0, -1);
 				$sql="INSERT INTO $tabla ($campos) VALUES ($values) $gpo;";
-				
+				$valores = explode(",",$values);
+		
 				//Excepción: para evitar el duplicado en la tabla usuario_contacto
 				if($tabla=="usuarios_contacto"){
 					$id_usuario=$datos["id_usuario"];
@@ -136,7 +137,26 @@ switch($_POST["metodo"]){
 					$sql=str_replace("id_permiso='$id_permiso',","",$sql);
 				}
 				
-				$res=$bd->exec($sql);
+				$res=$bd->query($sql);
+				$id_arti = $bd->lastInsertId();	
+				if($id_arti == 0){
+					$id_arti = $valores[1];
+				}
+				
+				//Agrega datos almacen_inventario
+				if($tabla=="articulos"){
+					
+					$validate_query="SELECT COUNT(*) as cant FROM almacen WHERE id_articulo = $id_arti";
+					$query=$bd->query($validate_query);
+					$res = $query->fetch(PDO::FETCH_ASSOC);
+					$result= $res["cant"];				
+					if($result==0){
+						$query="INSERT INTO almacen_inventario (id_empresa, id_articulo, cantidad) VALUES (1, $id_arti,0);";
+						$bd->exec($query);
+						$query="INSERT INTO almacen (id_empresa, id_articulo, cantidad) VALUES(1,$id_arti,0);";
+						$bd->exec($query);
+					}
+				}
 				
 				if($primero){		
 				//corre la consulta para obtener el dato pivote id
@@ -162,7 +182,7 @@ switch($_POST["metodo"]){
 			}
 			$bd->commit();
 			$r["continuar"]=true;
-			$r["info"]="Registro añadido satisfactoriamente";
+			$r["info"]="Se agrego el articulo exitosamente";
 		}catch(PDOException $err){
 			$bd->rollBack();
 			$r["continuar"]=false;
